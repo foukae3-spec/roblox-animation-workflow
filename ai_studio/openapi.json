@@ -1,0 +1,361 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Roblox 3D Animation Engine Tools",
+    "description": "Tools for programmatically generating, staging, and rendering 3D Roblox shorts with Blender.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8080",
+      "description": "Local Roblox Studio Bridge Server"
+    }
+  ],
+  "paths": {
+    "/api/tools/get_engine_vocabulary": {
+      "post": {
+        "operationId": "get_engine_vocabulary",
+        "summary": "Get full engine vocabulary (characters, sets, marks, poses, actions, props, sfx)",
+        "description": "Retrieve the strict vocabulary of the Blender Roblox animation engine. Call this first before authoring any script or shots.json.",
+        "responses": {
+          "200": {
+            "description": "Engine vocabulary dictionary",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tools/validate_shotlist": {
+      "post": {
+        "operationId": "validate_shotlist",
+        "summary": "Validate an episode shots.json against engine rules",
+        "description": "Check shots.json against engine vocabulary, camera rules, mark locations, and constraints. Must achieve 0 errors before rendering.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["episode_path"],
+                "properties": {
+                  "episode_path": {
+                    "type": "string",
+                    "description": "Path to episode folder, e.g. 'episodes/wi_zlatan_bff'"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Validation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "valid": {"type": "boolean"},
+                    "errors": {"type": "array", "items": {"type": "string"}},
+                    "warnings": {"type": "array", "items": {"type": "string"}}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tools/create_new_episode": {
+      "post": {
+        "operationId": "create_new_episode",
+        "summary": "Create a new episode workspace with script.md and shots.json",
+        "description": "Create a new episode folder, writes script.md and shots.json, and runs automated vocabulary validation.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["episode_id", "title", "format_name", "script_markdown", "shots_data"],
+                "properties": {
+                  "episode_id": {
+                    "type": "string",
+                    "description": "Folder slug prefixed with 'wi_' or 'itt_'"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Catchy title for the video"
+                  },
+                  "format_name": {
+                    "type": "string",
+                    "enum": ["what_if", "in_this_town"],
+                    "description": "Format identifier"
+                  },
+                  "script_markdown": {
+                    "type": "string",
+                    "description": "Markdown beat sheet with narration lines and beats"
+                  },
+                  "shots_data": {
+                    "type": "object",
+                    "description": "Complete shot list specification adhering to SHOTLIST_FORMAT.md"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Creation and validation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tools/generate_voiceover": {
+      "post": {
+        "operationId": "generate_voiceover",
+        "summary": "Synthesize voiceover dialogue and word timings",
+        "description": "Synthesizes character speech using ElevenLabs or Edge TTS fallback and creates timing.json with word-level alignment.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["episode_path"],
+                "properties": {
+                  "episode_path": {
+                    "type": "string",
+                    "description": "Path to episode directory"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Voiceover synthesis result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tools/build_blender_scene": {
+      "post": {
+        "operationId": "build_blender_scene",
+        "summary": "Assemble 3D Blender scene (<episode>.blend)",
+        "description": "Executes headless Blender to assemble sets, rigs, poses, lip-sync animations, props, and cameras.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["episode_path"],
+                "properties": {
+                  "episode_path": {
+                    "type": "string",
+                    "description": "Path to episode directory"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scene assembly result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tools/render_contact_sheet": {
+      "post": {
+        "operationId": "render_contact_sheet",
+        "summary": "Render visual QA contact sheet",
+        "description": "Renders a labeled contact sheet (render/contact_sheet.png) showing one still per shot for visual QA before rendering full video.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["episode_path"],
+                "properties": {
+                  "episode_path": {
+                    "type": "string",
+                    "description": "Path to episode directory"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contact sheet result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tools/render_video_pipeline": {
+      "post": {
+        "operationId": "render_video_pipeline",
+        "summary": "Run full video render and editing pipeline",
+        "description": "Renders 3D frames, audio mix (voice, music, sfx), animated karaoke captions, hook title box, and publish pack.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["episode_path"],
+                "properties": {
+                  "episode_path": {
+                    "type": "string",
+                    "description": "Path to episode directory"
+                  },
+                  "final": {
+                    "type": "boolean",
+                    "description": "True for 1080x1920 final with publish package; False for preview"
+                  },
+                  "only_stages": {
+                    "type": "string",
+                    "description": "Optional comma-separated stages (e.g. 'raw,edit')"
+                  },
+                  "from_stage": {
+                    "type": "string",
+                    "description": "Optional stage to resume from ('validate', 'voice', 'build', 'sheet', 'raw', 'edit', 'thumb', 'publish')"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pipeline execution result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tools/render_thumbnail": {
+      "post": {
+        "operationId": "render_thumbnail",
+        "summary": "Render YouTube/TikTok hook title thumbnail",
+        "description": "Renders the high-CTR vertical cover thumbnail graphic with stylized title card text box.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["episode_path"],
+                "properties": {
+                  "episode_path": {
+                    "type": "string",
+                    "description": "Path to episode directory"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Thumbnail rendering result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/tools/inspect_frame": {
+      "post": {
+        "operationId": "inspect_frame",
+        "summary": "Render a specific frame from the scene for QA",
+        "description": "Renders an exact frame number from the 3D Blender scene to an image file for inspection.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["episode_path", "frame_number"],
+                "properties": {
+                  "episode_path": {
+                    "type": "string",
+                    "description": "Path to episode directory"
+                  },
+                  "frame_number": {
+                    "type": "integer",
+                    "description": "Frame number to render"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Frame render result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

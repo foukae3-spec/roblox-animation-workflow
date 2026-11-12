@@ -2,13 +2,14 @@
 
 This guide explains how to use **Google AI Studio** and **Gemini 2.5 / 1.5** as an autonomous director for the Blender Roblox 3D Animation Pipeline.
 
-There are two primary ways to operate:
-1. **Automated AI Studio Agent (Recommended)**: Runs locally with your Google AI Studio API key (`GOOGLE_API_KEY`) and executes tools automatically via Function Calling.
-2. **Google AI Studio Web Interface**: Use the official browser UI at [https://aistudio.google.com/](https://aistudio.google.com/) with custom function calling schemas and our local bridge UI.
+There are three primary ways to operate:
+1. **Automated Gemini Director Agent (Fastest & Easiest)**: Runs locally with your Google AI Studio API key (`GOOGLE_API_KEY` or `GEMINI_API_KEY`) and executes tools automatically via Automatic Function Calling (AFC).
+2. **Google AI Studio Web UI with 1-Click OpenAPI Import**: Import `ai_studio/openapi.json` into Google AI Studio Tools with one click.
+3. **Google AI Studio Web UI with Local Bridge Dashboard**: Use the browser UI at [https://aistudio.google.com/](https://aistudio.google.com/) alongside the local web bridge dashboard (`studio_bridge_server.py`) to execute function calls with one click.
 
 ---
 
-## Method 1: Automated Gemini Director Agent (Fastest & Easiest)
+## Method 1: Automated Gemini Director Agent (Autonomous CLI)
 
 We provide a turnkey runner (`ai_studio/gemini_director.py`) that uses the official `google-genai` SDK with automatic tool execution.
 
@@ -47,59 +48,56 @@ Gemini will autonomously:
 
 ---
 
-## Method 2: Inside Google AI Studio Web UI (Browser)
+## Method 2: Google AI Studio Web UI with 1-Click OpenAPI Import
 
-If you prefer using the browser UI at [https://aistudio.google.com/](https://aistudio.google.com/):
+Google AI Studio allows importing tools from an OpenAPI 3.0 specification:
 
-### Step 1: Create a New Chat in Google AI Studio
-1. Navigate to [https://aistudio.google.com/](https://aistudio.google.com/).
-2. Click **Create New** -> **Chat Prompt**.
-3. In the right panel, select model: **Gemini 2.5 Flash** or **Gemini 1.5 Pro**.
+1. Start the local bridge server:
+   ```bash
+   python ai_studio/studio_bridge_server.py --port 8080
+   ```
+2. Open **[https://aistudio.google.com/](https://aistudio.google.com/)** in your browser.
+3. Click **Create New Prompt** -> **Chat Prompt**.
+4. Set Model to **Gemini 2.5 Flash** or **Gemini 1.5 Pro**.
+5. Copy the contents of [`ai_studio/system_prompt.txt`](system_prompt.txt) into the **System Instructions** box.
+6. In the right sidebar under **Tools**, click **Function Calling** -> **Import OpenAPI spec**.
+7. Paste the contents of [`ai_studio/openapi.json`](openapi.json) (or enter `http://127.0.0.1:8080/openapi.json`).
+8. All 9 tools (`get_engine_vocabulary`, `validate_shotlist`, `create_new_episode`, etc.) are now imported into your AI Studio session!
 
-### Step 2: Set System Instructions
-Copy the contents of [`ai_studio/system_prompt.txt`](system_prompt.txt) and paste them into the **System Instructions** box in Google AI Studio.
+---
 
-### Step 3: Add Function Calling Tools
-In the right settings sidebar:
-1. Scroll down to **Tools** and toggle **Function Calling** ON.
-2. Add the tool definitions by copying the declarations from [`ai_studio/tools_schema.json`](tools_schema.json).
-3. The core tools available are:
-   - `get_engine_vocabulary`: Queries valid characters, sets, marks, poses, actions, props, and SFX.
-   - `create_new_episode`: Creates episode directory with `script.md` and `shots.json`.
-   - `validate_shotlist`: Checks shotlist against the engine constraints.
-   - `generate_voiceover`: Generates speech audio and word timing.
-   - `build_blender_scene`: Assembles sets, rigs, and animations into `.blend`.
-   - `render_contact_sheet`: Generates contact sheet stills for visual QA.
-   - `render_video_pipeline`: Renders 3D frames and mixes final video with captions.
-   - `render_thumbnail`: Generates the hook title thumbnail graphic.
-   - `inspect_frame`: Renders a specific frame for detailed visual inspection.
+## Method 3: Web UI with Local Bridge Dashboard
 
-### Step 4: Run the Local Bridge Dashboard
-When chatting in Google AI Studio, Gemini will produce Function Calls. To execute these calls locally with one click:
+When chatting with Gemini inside Google AI Studio, Gemini will produce Function Calls whenever it wants to inspect assets, validate scripts, or render scenes.
+
+To execute these calls and feed responses back seamlessly:
+
+### Step 1: Start the Bridge Server
 ```bash
 python ai_studio/studio_bridge_server.py --port 8080
 ```
 Open **[http://localhost:8080](http://localhost:8080)** in your browser.
 
-- Select the tool requested by Gemini.
-- Paste the argument JSON.
-- Click **Execute Tool**.
-- Click **Copy Result** and paste the response into Google AI Studio as the function response.
+### Step 2: Set Up Prompt in Google AI Studio
+1. Navigate to [https://aistudio.google.com/](https://aistudio.google.com/).
+2. Paste [`ai_studio/system_prompt.txt`](system_prompt.txt) into **System Instructions**.
+3. Under **Tools**, enable **Function Calling** and paste declarations from [`ai_studio/tools_schema.json`](tools_schema.json).
 
-Alternatively, you can run tools via the CLI:
-```bash
-# Example: Validate an episode
-python tools/roblox_tools.py validate episodes/wi_zlatan_bff
-
-# Example: Render contact sheet
-python tools/roblox_tools.py sheet episodes/wi_zlatan_bff
-```
+### Step 3: Fast Two-Way Execution Loop
+1. Ask Gemini to create an episode (e.g., *"Make a 30s short about Zlatan challenging Theo at school"*).
+2. When Gemini emits a Function Call (e.g. `get_engine_vocabulary()` or `create_new_episode`):
+   - Switch to `http://localhost:8080`.
+   - On the **Paste AI Studio Tool Call** tab, paste the JSON call.
+   - Click **Execute Call**.
+   - Click **Copy for AI Studio (functionResponse)**.
+3. Back in Google AI Studio, paste the result into the function response box.
+4. Gemini will inspect the response and proceed to the next directing phase!
 
 ---
 
-## Method 3: Direct API / Python Scripting
+## Method 4: Direct Python SDK Scripting
 
-You can also integrate the tools into your own custom Gemini pipeline:
+You can embed the tools directly into your own Gemini scripts using the official `google-genai` SDK:
 
 ```python
 from google import genai
@@ -116,7 +114,7 @@ chat = client.chats.create(
     )
 )
 
-response = chat.send_message("Check what props we can use in our Roblox video.")
+response = chat.send_message("What character presets can we use in our video?")
 print(response.text)
 ```
 
@@ -128,7 +126,7 @@ When an episode finishes rendering:
 - **Contact Sheet**: `episodes/<ep>/render/contact_sheet.png` (One still per shot for visual QA)
 - **Preview Video**: `episodes/<ep>/out/<ep>_preview.mp4`
 - **Publish Package**: `publish/<ep>/`
-  - `<ep>_final.mp4` (Full 1080x1920 video with captions, music & SFX)
+  - `<ep>_final.mp4` (Full 1080x1920 vertical video with captions, music & SFX)
   - `<ep>_nomusic_final.mp4` (For adding trending TikTok sounds)
   - `thumbnail.png` (High-CTR title thumbnail)
   - `tiktok.txt` (Optimized caption + hashtags)

@@ -11,7 +11,7 @@ import bpy, os, math
 from mathutils import Vector
 
 PROJECT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) if "__file__" in globals() else \
-    r"C:\Users\User\Desktop\blender roblox tiktoks"
+    os.path.abspath(os.path.join(os.getcwd()))
 OUT = os.path.join(PROJECT, "public", "roblox", "sets")
 
 

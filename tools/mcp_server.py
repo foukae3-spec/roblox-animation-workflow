@@ -59,7 +59,8 @@ def create_episode(
     title: str,
     format_name: str,
     script_markdown: str,
-    shots_json_content: str,
+    shots_data: Any = None,
+    shots_json_content: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Create a new episode directory with script.md and shots.json, then validate it.
 
@@ -69,12 +70,12 @@ def create_episode(
         title: Title of the short.
         format_name: Format name ('what_if' or 'in_this_town').
         script_markdown: The markdown beat sheet / script.
-        shots_json_content: JSON string representing the full shots.json
-          specification.
+        shots_data: Shots dictionary or JSON string representing the full shots.json specification.
+        shots_json_content: Optional legacy parameter alias for shots_data.
     """
-    data = json.loads(shots_json_content)
+    payload = shots_data if shots_data is not None else (shots_json_content or {})
     return create_new_episode(
-        episode_id, title, format_name, script_markdown, data
+        episode_id, title, format_name, script_markdown, payload
     )
 
 
@@ -153,7 +154,7 @@ def check_frame(
         frame_number: The specific frame number to render.
         out_dir: Optional custom output directory.
     """
-    return inspect_frame(episode_path, frame_number, out_dir=out_dir)
+    return inspect_frame(episode_path, int(frame_number), out_dir=out_dir)
 
 
 if __name__ == "__main__":

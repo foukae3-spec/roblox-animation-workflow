@@ -111,16 +111,18 @@ python ai_studio/gemini_director.py --interactive
 ```
 Gemini will query the engine vocabulary, draft the episode, validate the shot list, synthesize speech, assemble the Blender scene, generate QA contact sheets, and render the final short.
 
-### Method B: Google AI Studio Web Interface
+### Method B: Google AI Studio Web Interface (1-Click OpenAPI Import or Tools Schema)
 1. Open [Google AI Studio](https://aistudio.google.com/) and create a new **Chat Prompt**.
 2. Select **Gemini 2.5 Flash** or **Gemini 1.5 Pro**.
 3. Paste the contents of [`ai_studio/system_prompt.txt`](ai_studio/system_prompt.txt) into the **System Instructions** field.
-4. Enable **Function Calling** under Tools and import/copy the schemas from [`ai_studio/tools_schema.json`](ai_studio/tools_schema.json).
-5. Launch the local bridge dashboard:
+4. Launch the local bridge dashboard:
    ```bash
    python ai_studio/studio_bridge_server.py --port 8080
    ```
-6. Open `http://localhost:8080` to execute tool calls in one click and paste results back to Google AI Studio.
+5. In Google AI Studio under **Tools** -> **Function Calling**:
+   - **Option 1 (1-Click OpenAPI)**: Click **Import OpenAPI spec** and paste [`ai_studio/openapi.json`](ai_studio/openapi.json) (or enter `http://127.0.0.1:8080/openapi.json`).
+   - **Option 2 (JSON Schema)**: Copy function declarations from [`ai_studio/tools_schema.json`](ai_studio/tools_schema.json).
+6. Open `http://localhost:8080` in your browser. Whenever Gemini requests a tool, paste the tool call, click **Execute**, and copy the formatted `functionResponse` back into Google AI Studio.
 
 ---
 
@@ -182,6 +184,16 @@ python tools/roblox_tools.py render episodes/wi_zlatan_bff --final
 
 ---
 
+## 🧪 Automated Testing
+
+Run the included automated test suite to verify tool functionality, OpenAPI schemas, bridge server endpoints, and Blender scene resolution:
+
+```bash
+python -m unittest tests/test_tools.py -v
+```
+
+---
+
 ## 📁 Repository Structure
 
 ```
@@ -189,6 +201,7 @@ python tools/roblox_tools.py render episodes/wi_zlatan_bff --final
 ├── ai_studio/                 # Google AI Studio tool definitions & runners
 │   ├── STUDIO_GUIDE.md        # Comprehensive Google AI Studio walkthrough
 │   ├── gemini_director.py     # Automated Gemini agent with Function Calling
+│   ├── openapi.json           # OpenAPI 3.0 specification for 1-click AI Studio import
 │   ├── studio_bridge_server.py# Local web UI & REST API bridge for AI Studio
 │   ├── system_prompt.txt      # System Instructions for Gemini
 │   └── tools_schema.json      # Function Declaration JSON schemas
@@ -212,6 +225,8 @@ python tools/roblox_tools.py render episodes/wi_zlatan_bff --final
 │   ├── audio/                 # SFX and background music
 │   └── roblox/                # Rig templates, sets, and props
 ├── publish/                   # Finished upload-ready shorts
+├── tests/                     # Automated test suite
+│   └── test_tools.py          # Unit & integration tests
 ├── tools/                     # Programmatic tool interfaces & servers
 │   ├── roblox_tools.py        # Python API and CLI tool wrapper
 │   └── mcp_server.py          # Model Context Protocol (FastMCP) server

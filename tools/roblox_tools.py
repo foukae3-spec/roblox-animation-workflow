@@ -20,24 +20,62 @@ from typing import Any, Dict, List, Optional
 ROOT = Path(__file__).resolve().parent.parent
 PIPE = ROOT / "pipeline"
 
+# Load .env if present
+_env_file = ROOT / ".env"
+if _env_file.exists():
+    try:
+        for _line in _env_file.read_text(encoding="utf-8").splitlines():
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _k, _v = _line.split("=", 1)
+                _k, _v = _k.strip(), _v.strip()
+                if _k and _k not in os.environ:
+                    os.environ[_k] = _v
+    except Exception:
+        pass
+
 
 def find_blender() -> str:
-    """Locate the Blender executable."""
+    """Locate the Blender executable across Windows, macOS, Linux, or env vars."""
     if os.environ.get("BLENDER"):
-        return os.environ["BLENDER"]
-    found = sorted(
-        glob.glob(r"C:\Program Files\Blender Foundation\Blender *\blender.exe"),
-        key=lambda p: [
-            int(x) if x.isdigit() else x
-            for x in Path(p).parent.name.split()[-1].split(".")
-        ],
-    )
-    if found:
-        return found[-1]
-    # Fallback to system path
+        cand = os.environ["BLENDER"]
+        if Path(cand).exists():
+            return cand
+
+    # Standard Windows install locations
+    win_patterns = [
+        r"C:\Program Files\Blender Foundation\Blender *\blender.exe",
+        r"C:\Program Files (x86)\Blender Foundation\Blender *\blender.exe",
+        r"C:\Program Files\Steam\steamapps\common\Blender\blender.exe",
+        r"D:\SteamLibrary\steamapps\common\Blender\blender.exe",
+        r"D:\Program Files\Blender Foundation\Blender *\blender.exe",
+    ]
+    for pat in win_patterns:
+        found = sorted(
+            glob.glob(pat),
+            key=lambda p: [
+                int(x) if x.isdigit() else x
+                for x in Path(p).parent.name.split()[-1].split(".")
+            ],
+        )
+        if found:
+            return found[-1]
+
+    # macOS application bundle
+    mac_app = Path("/Applications/Blender.app/Contents/MacOS/Blender")
+    if mac_app.exists():
+        return str(mac_app)
+
+    # Linux standard paths
+    for lin in ["/usr/bin/blender", "/usr/local/bin/blender", "/snap/bin/blender"]:
+        if Path(lin).exists():
+            return lin
+
+    # Fallback to system PATH
     which = shutil.which("blender")
     if which:
         return which
+
     raise FileNotFoundError(
         "Blender not found. Install Blender 5.x or set BLENDER env variable."
     )
@@ -144,9 +182,31 @@ def create_new_episode(
     title: str,
     format_name: str,
     script_markdown: str,
-    shots_data: Dict[str, Any],
+    shots_data: Dict[str, Any] | str,
 ) -> Dict[str, Any]:
     """Create a new episode folder with script.md and shots.json, then validate it."""
+    if not episode_id or not str(episode_id).strip():
+        return {
+            "success": False,
+            "error": "episode_id is required and cannot be empty.",
+            "validation": {"valid": False, "errors": ["episode_id cannot be empty"], "warnings": []},
+        }
+
+    episode_id = str(episode_id).strip()
+    if isinstance(shots_data, str):
+        try:
+            shots_data = json.loads(shots_data)
+        except Exception as e:
+            return {
+                "success": False,
+                "episode_id": episode_id,
+                "error": f"Invalid shots_data JSON string: {e}",
+                "validation": {"valid": False, "errors": [f"shots_data parse error: {e}"], "warnings": []},
+            }
+
+    if not isinstance(shots_data, dict):
+        shots_data = {}
+
     ep_dir = ROOT / "episodes" / episode_id
     ep_dir.mkdir(parents=True, exist_ok=True)
 
@@ -224,8 +284,16 @@ def build_blender_scene(episode_path: str) -> Dict[str, Any]:
 
     text = build_log.read_text(encoding="utf-8", errors="replace")
     success = p.returncode == 0 and "BUILT" in text and "Traceback" not in text
-    shots_data = json.loads((ep / "shots.json").read_text(encoding="utf-8"))
-    blend_file = ep / f"{shots_data['episode']}.blend"
+
+    shots_file = ep / "shots.json"
+    blend_slug = ep.name
+    if shots_file.exists():
+        try:
+            sd = json.loads(shots_file.read_text(encoding="utf-8"))
+            blend_slug = sd.get("episode", ep.name)
+        except Exception:
+            pass
+    blend_file = ep / f"{blend_slug}.blend"
 
     return {
         "success": success,
@@ -278,7 +346,18 @@ def render_video_pipeline(
 
     q = "final" if final else "preview"
     outs = sorted((ep / "out").glob(f"*_{q}.mp4")) if (ep / "out").exists() else []
-    publish_dir = ROOT / "publish" / ep.name
+
+    shots_file = ep / "shots.json"
+    blend_slug = ep.name
+    if shots_file.exists():
+        try:
+            sd = json.loads(shots_file.read_text(encoding="utf-8"))
+            blend_slug = sd.get("episode", ep.name)
+        except Exception:
+            pass
+    publish_dir = ROOT / "publish" / blend_slug
+    if not publish_dir.exists():
+        publish_dir = ROOT / "publish" / ep.name
 
     return {
         "success": p.returncode == 0,
@@ -318,8 +397,19 @@ def inspect_frame(episode_path: str, frame_number: int, out_dir: Optional[str] =
     if not ep.is_absolute():
         ep = ROOT / ep
 
-    shots_data = json.loads((ep / "shots.json").read_text(encoding="utf-8"))
-    blend_file = ep / f"{shots_data['episode']}.blend"
+    shots_file = ep / "shots.json"
+    blend_slug = ep.name
+    if shots_file.exists():
+        try:
+            sd = json.loads(shots_file.read_text(encoding="utf-8"))
+            blend_slug = sd.get("episode", ep.name)
+        except Exception:
+            pass
+
+    blend_file = ep / f"{blend_slug}.blend"
+    if not blend_file.exists():
+        blend_file = ep / f"{ep.name}.blend"
+
     if not blend_file.exists():
         return {
             "success": False,
@@ -329,6 +419,7 @@ def inspect_frame(episode_path: str, frame_number: int, out_dir: Optional[str] =
     target_dir = Path(out_dir) if out_dir else ep / "render" / "inspect"
     target_dir.mkdir(parents=True, exist_ok=True)
 
+    frame_num = int(frame_number)
     blender = find_blender()
     cmd = [
         blender,
@@ -338,19 +429,28 @@ def inspect_frame(episode_path: str, frame_number: int, out_dir: Optional[str] =
         str(PIPE / "frames.py"),
         "--",
         str(target_dir),
-        str(frame_number),
+        str(frame_num),
     ]
     p = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT)
-    frame_png = target_dir / f"frame_{frame_number:05d}.png"
-    if not frame_png.exists():
-        # Look for any matching png in target_dir
-        matches = list(target_dir.glob(f"*{frame_number}*.png"))
+
+    # frames.py renders to f{frame:05d}.png
+    primary_png = target_dir / f"f{frame_num:05d}.png"
+    secondary_png = target_dir / f"frame_{frame_num:05d}.png"
+
+    frame_png = None
+    if primary_png.exists():
+        frame_png = primary_png
+    elif secondary_png.exists():
+        frame_png = secondary_png
+    else:
+        # Fallback to exact match on formatted frame number only
+        matches = list(target_dir.glob(f"*{frame_num:05d}*.png"))
         if matches:
             frame_png = matches[0]
 
     return {
-        "success": frame_png.exists(),
-        "frame_image": str(frame_png) if frame_png.exists() else None,
+        "success": frame_png is not None and frame_png.exists(),
+        "frame_image": str(frame_png) if frame_png and frame_png.exists() else None,
         "stdout": p.stdout[-1000:] if p.stdout else "",
     }
 

@@ -18,6 +18,7 @@ __pycache__/
 # Intermediate raw render video dumps (reproducible from .blend)
 episodes/**/render/raw_*.mp4
 episodes/**/render/logs/
+episodes/**/render/inspect/
 episodes/**/render/sheet/*.png
 !episodes/**/render/contact_sheet.png
 

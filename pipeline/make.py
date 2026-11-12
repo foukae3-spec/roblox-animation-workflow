@@ -26,9 +26,12 @@ def blender_exe():
         return os.environ["BLENDER"]
     found = sorted(glob.glob(r"C:\Program Files\Blender Foundation\Blender *\blender.exe"),
                    key=lambda p: [int(x) if x.isdigit() else x for x in Path(p).parent.name.split()[-1].split(".")])
-    if not found:
-        sys.exit("Blender not found: set the BLENDER environment variable to blender.exe")
-    return found[-1]
+    if found:
+        return found[-1]
+    which = shutil.which("blender")
+    if which:
+        return which
+    sys.exit("Blender not found: set the BLENDER environment variable to blender.exe")
 
 
 def run(cmd, log=None, label=""):

@@ -68,7 +68,7 @@ def create_new_episode_tool(
     title: str,
     format_name: str,
     script_markdown: str,
-    shots_json_str: str,
+    shots_data: dict,
 ) -> str:
     """Create a new episode directory with script.md and shots.json, and validate it.
 
@@ -77,15 +77,16 @@ def create_new_episode_tool(
         title: Catchy title for the video.
         format_name: Format name ('what_if' or 'in_this_town').
         script_markdown: Markdown beat sheet with narration beats.
-        shots_json_str: Valid JSON string adhering to SHOTLIST_FORMAT.md schema.
+        shots_data: Valid JSON object or shots dictionary adhering to SHOTLIST_FORMAT.md schema.
     """
     print(f"\n[Tool Call] -> create_new_episode({episode_id}, {title})")
-    try:
-        shots_data = json.loads(shots_json_str)
-    except json.JSONDecodeError as e:
-        return json.dumps(
-            {"success": False, "error": f"Invalid shots_json_str: {e}"}
-        )
+    if isinstance(shots_data, str):
+        try:
+            shots_data = json.loads(shots_data)
+        except json.JSONDecodeError as e:
+            return json.dumps(
+                {"success": False, "error": f"Invalid shots_data JSON string: {e}"}
+            )
 
     res = create_new_episode(
         episode_id, title, format_name, script_markdown, shots_data
@@ -127,7 +128,10 @@ def render_contact_sheet_tool(episode_path: str) -> str:
 
 
 def render_video_pipeline_tool(
-    episode_path: str, final: bool = False, only_stages: str = ""
+    episode_path: str,
+    final: bool = False,
+    only_stages: str = "",
+    from_stage: str = "",
 ) -> str:
     """Render the full video and VSE edit with voice, music, sfx, captions, and title card.
 
@@ -135,14 +139,16 @@ def render_video_pipeline_tool(
         episode_path: Path to episode directory.
         final: True for final 1080x1920 with publish pack; False for preview.
         only_stages: Optional comma-separated stages (e.g. 'raw,edit').
+        from_stage: Optional stage to resume from ('validate', 'voice', 'build', 'sheet', 'raw', 'edit', 'thumb', 'publish').
     """
     print(
-        f"\n[Tool Call] -> render_video_pipeline({episode_path}, final={final})"
+        f"\n[Tool Call] -> render_video_pipeline({episode_path}, final={final}, only_stages={only_stages}, from_stage={from_stage})"
     )
     res = render_video_pipeline(
         episode_path,
         final=final,
         only_stages=only_stages if only_stages else None,
+        from_stage=from_stage if from_stage else None,
     )
     return json.dumps(res)
 
@@ -165,8 +171,9 @@ def inspect_frame_tool(episode_path: str, frame_number: int) -> str:
         episode_path: Path to episode directory.
         frame_number: The integer frame number to render.
     """
-    print(f"\n[Tool Call] -> inspect_frame({episode_path}, frame={frame_number})")
-    res = inspect_frame(episode_path, frame_number)
+    frame_num = int(frame_number)
+    print(f"\n[Tool Call] -> inspect_frame({episode_path}, frame={frame_num})")
+    res = inspect_frame(episode_path, frame_num)
     return json.dumps(res)
 
 
@@ -207,24 +214,29 @@ def main():
     )
     args = parser.parse_args()
 
-    api_key = os.environ.get("GOOGLE_API_KEY")
+    api_key = os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY")
     if not api_key:
         # Check .env
         env_file = ROOT / ".env"
         if env_file.exists():
-            for line in env_file.read_text().splitlines():
+            for line in env_file.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
                 if line.startswith("GOOGLE_API_KEY="):
                     api_key = line.split("=", 1)[1].strip()
                     os.environ["GOOGLE_API_KEY"] = api_key
                     break
+                elif line.startswith("GEMINI_API_KEY="):
+                    api_key = line.split("=", 1)[1].strip()
+                    os.environ["GEMINI_API_KEY"] = api_key
+                    break
 
     if not api_key:
         sys.exit(
-            "GOOGLE_API_KEY not found. Please set GOOGLE_API_KEY environment variable or in .env."
+            "GOOGLE_API_KEY or GEMINI_API_KEY not found. Please set GOOGLE_API_KEY environment variable or in .env."
         )
 
     print(f"Connecting to Gemini ({args.model}) with Google GenAI SDK...")
-    client = genai.Client(http_options={"api_version": "v1beta"})
+    client = genai.Client(api_key=api_key, http_options={"api_version": "v1beta"})
     system_instruction = load_system_instruction()
 
     config = types.GenerateContentConfig(
