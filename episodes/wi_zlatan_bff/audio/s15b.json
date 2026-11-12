@@ -1,0 +1,38 @@
+{
+ "key": "en-US-BrianMultilingualNeural|+2%|-4Hz|And today, he trains with Zlatan!",
+ "engine": "edge",
+ "speaker": "Zlatan",
+ "audio_len": 2.376,
+ "words": [
+  [
+   "And",
+   0.061,
+   0.172
+  ],
+  [
+   "today",
+   0.184,
+   0.6
+  ],
+  [
+   "he",
+   0.625,
+   0.784
+  ],
+  [
+   "trains",
+   0.797,
+   1.225
+  ],
+  [
+   "with",
+   1.238,
+   1.373
+  ],
+  [
+   "Zlatan",
+   1.385,
+   2.01
+  ]
+ ]
+}

@@ -1,0 +1,63 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|Then they did a secret handshake longer than our school syllabus.",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 2.976,
+ "words": [
+  [
+   "Then",
+   0.091,
+   0.182
+  ],
+  [
+   "they",
+   0.193,
+   0.261
+  ],
+  [
+   "did",
+   0.273,
+   0.386
+  ],
+  [
+   "a",
+   0.398,
+   0.443
+  ],
+  [
+   "secret",
+   0.455,
+   0.818
+  ],
+  [
+   "handshake",
+   0.83,
+   1.295
+  ],
+  [
+   "longer",
+   1.307,
+   1.636
+  ],
+  [
+   "than",
+   1.648,
+   1.761
+  ],
+  [
+   "our",
+   1.773,
+   1.852
+  ],
+  [
+   "school",
+   1.864,
+   2.091
+  ],
+  [
+   "syllabus",
+   2.102,
+   2.636
+  ]
+ ]
+}

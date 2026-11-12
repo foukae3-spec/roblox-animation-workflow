@@ -1,0 +1,18 @@
+{
+ "key": "en-US-BrianMultilingualNeural|+2%|-4Hz|LET'S GO!",
+ "engine": "edge",
+ "speaker": "Zlatan",
+ "audio_len": 1.872,
+ "words": [
+  [
+   "LET'S",
+   0.074,
+   0.294
+  ],
+  [
+   "GO",
+   0.306,
+   0.637
+  ]
+ ]
+}

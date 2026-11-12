@@ -1,0 +1,63 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|A cameraman stood outside, and behind him was Zlatan Ibrahimovi\u0107 shouting:",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 4.632,
+ "words": [
+  [
+   "A",
+   0.091,
+   0.148
+  ],
+  [
+   "cameraman",
+   0.159,
+   0.682
+  ],
+  [
+   "stood",
+   0.693,
+   0.886
+  ],
+  [
+   "outside",
+   0.898,
+   1.455
+  ],
+  [
+   "and",
+   1.784,
+   1.841
+  ],
+  [
+   "behind",
+   1.852,
+   2.182
+  ],
+  [
+   "him",
+   2.193,
+   2.318
+  ],
+  [
+   "was",
+   2.443,
+   2.58
+  ],
+  [
+   "Zlatan",
+   2.591,
+   3.148
+  ],
+  [
+   "Ibrahimovi\u0107",
+   3.239,
+   3.886
+  ],
+  [
+   "shouting",
+   3.898,
+   4.284
+  ]
+ ]
+}

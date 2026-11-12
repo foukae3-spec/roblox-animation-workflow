@@ -1,0 +1,43 @@
+{
+ "key": "en-US-GuyNeural|+8%|+2Hz|Back off! Zlatan is my best friend!",
+ "engine": "edge",
+ "speaker": "Brother",
+ "audio_len": 3.888,
+ "words": [
+  [
+   "Back",
+   0.096,
+   0.386
+  ],
+  [
+   "off",
+   0.397,
+   0.814
+  ],
+  [
+   "Zlatan",
+   1.62,
+   2.107
+  ],
+  [
+   "is",
+   2.13,
+   2.234
+  ],
+  [
+   "my",
+   2.257,
+   2.373
+  ],
+  [
+   "best",
+   2.396,
+   2.65
+  ],
+  [
+   "friend",
+   2.662,
+   3.044
+  ]
+ ]
+}

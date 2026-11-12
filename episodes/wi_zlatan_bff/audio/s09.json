@@ -1,0 +1,38 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|My dad nearly swallowed his coffee.",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 1.992,
+ "words": [
+  [
+   "My",
+   0.091,
+   0.193
+  ],
+  [
+   "dad",
+   0.205,
+   0.477
+  ],
+  [
+   "nearly",
+   0.489,
+   0.739
+  ],
+  [
+   "swallowed",
+   0.75,
+   1.114
+  ],
+  [
+   "his",
+   1.125,
+   1.227
+  ],
+  [
+   "coffee",
+   1.239,
+   1.648
+  ]
+ ]
+}

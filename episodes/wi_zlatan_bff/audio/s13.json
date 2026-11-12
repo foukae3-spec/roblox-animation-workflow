@@ -1,0 +1,43 @@
+{
+ "key": "en-US-BrianMultilingualNeural|+2%|-4Hz|Who called Zlatan's best friend a liar?!",
+ "engine": "edge",
+ "speaker": "Zlatan",
+ "audio_len": 2.808,
+ "words": [
+  [
+   "Who",
+   0.086,
+   0.221
+  ],
+  [
+   "called",
+   0.233,
+   0.539
+  ],
+  [
+   "Zlatan's",
+   0.551,
+   1.189
+  ],
+  [
+   "best",
+   1.201,
+   1.532
+  ],
+  [
+   "friend",
+   1.544,
+   1.789
+  ],
+  [
+   "a",
+   1.801,
+   1.85
+  ],
+  [
+   "liar",
+   1.863,
+   2.316
+  ]
+ ]
+}

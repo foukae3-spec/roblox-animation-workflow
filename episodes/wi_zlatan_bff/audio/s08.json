@@ -1,0 +1,43 @@
+{
+ "key": "en-US-BrianMultilingualNeural|+2%|-4Hz|Where is my guy?! Zlatan has arrived!",
+ "engine": "edge",
+ "speaker": "Zlatan",
+ "audio_len": 3.264,
+ "words": [
+  [
+   "Where",
+   0.098,
+   0.27
+  ],
+  [
+   "is",
+   0.282,
+   0.392
+  ],
+  [
+   "my",
+   0.404,
+   0.588
+  ],
+  [
+   "guy",
+   0.601,
+   1.005
+  ],
+  [
+   "Zlatan",
+   1.484,
+   2.023
+  ],
+  [
+   "has",
+   2.035,
+   2.256
+  ],
+  [
+   "arrived",
+   2.268,
+   2.893
+  ]
+ ]
+}

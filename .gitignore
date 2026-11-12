@@ -1,0 +1,27 @@
+# Environment secrets
+.env
+.env.local
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Blender backup and lock files
+*.blend1
+*.blend2
+*.blend@
+*.blend@@
+
+# Intermediate raw render video dumps (reproducible from .blend)
+episodes/**/render/raw_*.mp4
+episodes/**/render/logs/
+episodes/**/render/sheet/*.png
+!episodes/**/render/contact_sheet.png
+
+# System artifacts
+Thumbs.db
+Desktop.ini
+.DS_Store

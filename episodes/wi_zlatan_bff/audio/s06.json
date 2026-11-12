@@ -1,0 +1,38 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|Then Saturday morning, the doorbell rang.",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 2.232,
+ "words": [
+  [
+   "Then",
+   0.102,
+   0.193
+  ],
+  [
+   "Saturday",
+   0.205,
+   0.568
+  ],
+  [
+   "morning",
+   0.58,
+   0.943
+  ],
+  [
+   "the",
+   1.17,
+   1.239
+  ],
+  [
+   "doorbell",
+   1.25,
+   1.636
+  ],
+  [
+   "rang",
+   1.648,
+   1.886
+  ]
+ ]
+}

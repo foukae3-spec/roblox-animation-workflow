@@ -1,0 +1,48 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|Within five minutes, my house became a stadium.",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 2.832,
+ "words": [
+  [
+   "Within",
+   0.102,
+   0.33
+  ],
+  [
+   "five",
+   0.341,
+   0.636
+  ],
+  [
+   "minutes",
+   0.648,
+   1.045
+  ],
+  [
+   "my",
+   1.216,
+   1.364
+  ],
+  [
+   "house",
+   1.375,
+   1.636
+  ],
+  [
+   "became",
+   1.648,
+   1.943
+  ],
+  [
+   "a",
+   1.955,
+   1.989
+  ],
+  [
+   "stadium",
+   2.0,
+   2.477
+  ]
+ ]
+}

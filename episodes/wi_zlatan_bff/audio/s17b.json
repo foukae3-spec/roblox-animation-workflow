@@ -1,0 +1,53 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|Zlatan was bicycle kicking soccer balls across the couch...",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 3.408,
+ "words": [
+  [
+   "Zlatan",
+   0.08,
+   0.591
+  ],
+  [
+   "was",
+   0.602,
+   0.739
+  ],
+  [
+   "bicycle",
+   0.75,
+   1.284
+  ],
+  [
+   "kicking",
+   1.295,
+   1.591
+  ],
+  [
+   "soccer",
+   1.602,
+   1.943
+  ],
+  [
+   "balls",
+   1.955,
+   2.193
+  ],
+  [
+   "across",
+   2.205,
+   2.511
+  ],
+  [
+   "the",
+   2.523,
+   2.591
+  ],
+  [
+   "couch",
+   2.602,
+   3.057
+  ]
+ ]
+}

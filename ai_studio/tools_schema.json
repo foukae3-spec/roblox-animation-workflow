@@ -1,0 +1,157 @@
+{
+  "function_declarations": [
+    {
+      "name": "get_engine_vocabulary",
+      "description": "Retrieve the full, strict vocabulary of the Blender Roblox animation engine. Contains all valid character cast presets, 3D sets, set dressings, marks (positions and seating), character poses, facial expressions, motion actions, hand and world props, sound effects (SFX), and music moods. Always call this BEFORE drafting a script or shots.json.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {}
+      }
+    },
+    {
+      "name": "create_new_episode",
+      "description": "Create a new episode workspace containing script.md and shots.json, and run initial validation. Episode ID must begin with 'wi_' (for 'What If' format) or 'itt_' (for 'In This Town' format).",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "episode_id": {
+            "type": "STRING",
+            "description": "Unique folder slug in snake_case prefixed by format, e.g., 'wi_zlatan_golden_boot' or 'itt_pizza_chaos'."
+          },
+          "title": {
+            "type": "STRING",
+            "description": "Engaging title of the short video, e.g., 'What If Zlatan Lost His Golden Boot?'."
+          },
+          "format_name": {
+            "type": "STRING",
+            "description": "Episode format identifier.",
+            "enum": ["what_if", "in_this_town"]
+          },
+          "script_markdown": {
+            "type": "STRING",
+            "description": "Full markdown beat sheet containing title, logline, cast table, and beat table with numbered lines and speaker tags."
+          },
+          "shots_data": {
+            "type": "OBJECT",
+            "description": "The complete shot list specification adhering to SHOTLIST_FORMAT.md (including episode, format, title, narrator, music, hook_title, thumbnail, publish, and shots array)."
+          }
+        },
+        "required": ["episode_id", "title", "format_name", "script_markdown", "shots_data"]
+      }
+    },
+    {
+      "name": "validate_shotlist",
+      "description": "Validate an episode's shots.json against engine vocabulary, camera rules, mark locations, and constraints. Returns error and warning lists. Must achieve 0 errors before rendering.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "episode_path": {
+            "type": "STRING",
+            "description": "Path to the episode folder (e.g. 'episodes/wi_zlatan_bff')."
+          }
+        },
+        "required": ["episode_path"]
+      }
+    },
+    {
+      "name": "generate_voiceover",
+      "description": "Synthesize voiceover audio for each dialogue shot using ElevenLabs (or Edge TTS fallback) and calculate precise word-level alignment timestamps stored in timing.json.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "episode_path": {
+            "type": "STRING",
+            "description": "Path to the episode directory, e.g. 'episodes/wi_zlatan_bff'."
+          }
+        },
+        "required": ["episode_path"]
+      }
+    },
+    {
+      "name": "build_blender_scene",
+      "description": "Assemble the complete 3D scene in Blender in headless background mode: instantiates sets, rigs R6 characters, applies poses and lip-sync motions, places props, and animates cameras into <episode>.blend.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "episode_path": {
+            "type": "STRING",
+            "description": "Path to the episode directory, e.g. 'episodes/wi_zlatan_bff'."
+          }
+        },
+        "required": ["episode_path"]
+      }
+    },
+    {
+      "name": "render_contact_sheet",
+      "description": "Render a visual QA contact sheet (render/contact_sheet.png) showing one labeled still from the middle of each shot. Used to visually check character framing, prop visibility, and staging before full video rendering.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "episode_path": {
+            "type": "STRING",
+            "description": "Path to the episode directory."
+          }
+        },
+        "required": ["episode_path"]
+      }
+    },
+    {
+      "name": "render_video_pipeline",
+      "description": "Execute the full video render and editing pipeline in Blender. Renders 3D frames, combines audio mixes (voice, sfx, music), generates animated karaoke captions, hook title box, and transitions.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "episode_path": {
+            "type": "STRING",
+            "description": "Path to the episode directory."
+          },
+          "final": {
+            "type": "BOOLEAN",
+            "description": "Set to True for full 1080x1920 production render with publishing package; False for fast 540x960 preview."
+          },
+          "only_stages": {
+            "type": "STRING",
+            "description": "Optional comma-separated list of stages to run (e.g. 'raw,edit')."
+          },
+          "from_stage": {
+            "type": "STRING",
+            "description": "Optional stage to resume from ('validate', 'voice', 'build', 'sheet', 'raw', 'edit', 'thumb', 'publish')."
+          }
+        },
+        "required": ["episode_path"]
+      }
+    },
+    {
+      "name": "render_thumbnail",
+      "description": "Render the high-CTR YouTube/TikTok cover thumbnail graphic with stylized hook title card text box.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "episode_path": {
+            "type": "STRING",
+            "description": "Path to the episode directory."
+          }
+        },
+        "required": ["episode_path"]
+      }
+    },
+    {
+      "name": "inspect_frame",
+      "description": "Render an exact specific frame from the 3D scene to an image file for inspection.",
+      "parameters": {
+        "type": "OBJECT",
+        "properties": {
+          "episode_path": {
+            "type": "STRING",
+            "description": "Path to the episode directory."
+          },
+          "frame_number": {
+            "type": "INTEGER",
+            "description": "Frame number to render."
+          }
+        },
+        "required": ["episode_path", "frame_number"]
+      }
+    }
+  ]
+}

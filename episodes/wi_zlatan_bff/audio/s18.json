@@ -1,0 +1,68 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|My brother was screaming, and our cat was already planning its escape.",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 3.624,
+ "words": [
+  [
+   "My",
+   0.091,
+   0.205
+  ],
+  [
+   "brother",
+   0.216,
+   0.534
+  ],
+  [
+   "was",
+   0.545,
+   0.67
+  ],
+  [
+   "screaming",
+   0.682,
+   1.182
+  ],
+  [
+   "and",
+   1.455,
+   1.523
+  ],
+  [
+   "our",
+   1.534,
+   1.636
+  ],
+  [
+   "cat",
+   1.648,
+   1.864
+  ],
+  [
+   "was",
+   1.875,
+   2.0
+  ],
+  [
+   "already",
+   2.011,
+   2.307
+  ],
+  [
+   "planning",
+   2.318,
+   2.705
+  ],
+  [
+   "its",
+   2.716,
+   2.818
+  ],
+  [
+   "escape",
+   2.83,
+   3.273
+  ]
+ ]
+}

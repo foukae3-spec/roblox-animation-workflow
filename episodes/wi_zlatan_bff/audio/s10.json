@@ -1,0 +1,33 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+4Hz|Is that... THE REAL ZLATAN?!",
+ "engine": "edge",
+ "speaker": "Theo",
+ "audio_len": 2.184,
+ "words": [
+  [
+   "Is",
+   0.091,
+   0.193
+  ],
+  [
+   "that",
+   0.205,
+   0.477
+  ],
+  [
+   "THE",
+   0.864,
+   0.932
+  ],
+  [
+   "REAL",
+   0.943,
+   1.216
+  ],
+  [
+   "ZLATAN",
+   1.227,
+   1.761
+  ]
+ ]
+}

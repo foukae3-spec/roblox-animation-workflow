@@ -1,0 +1,78 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|I laughed: lions don't hang out with humans! My brother just smiled: you'll see.",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 4.8,
+ "words": [
+  [
+   "I",
+   0.091,
+   0.148
+  ],
+  [
+   "laughed",
+   0.159,
+   0.568
+  ],
+  [
+   "lions",
+   0.943,
+   1.227
+  ],
+  [
+   "don't",
+   1.239,
+   1.443
+  ],
+  [
+   "hang",
+   1.455,
+   1.648
+  ],
+  [
+   "out",
+   1.659,
+   1.761
+  ],
+  [
+   "with",
+   1.773,
+   1.875
+  ],
+  [
+   "humans",
+   1.886,
+   2.352
+  ],
+  [
+   "My",
+   2.727,
+   2.807
+  ],
+  [
+   "brother",
+   2.818,
+   3.068
+  ],
+  [
+   "just",
+   3.08,
+   3.261
+  ],
+  [
+   "smiled",
+   3.273,
+   3.682
+  ],
+  [
+   "you'll",
+   4.045,
+   4.136
+  ],
+  [
+   "see",
+   4.148,
+   4.466
+  ]
+ ]
+}

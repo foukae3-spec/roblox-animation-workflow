@@ -1,0 +1,48 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|Everyone pointed at Dad. Dad pointed at me.",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 2.544,
+ "words": [
+  [
+   "Everyone",
+   0.091,
+   0.386
+  ],
+  [
+   "pointed",
+   0.398,
+   0.705
+  ],
+  [
+   "at",
+   0.716,
+   0.795
+  ],
+  [
+   "Dad",
+   0.807,
+   1.114
+  ],
+  [
+   "Dad",
+   1.489,
+   1.659
+  ],
+  [
+   "pointed",
+   1.67,
+   1.932
+  ],
+  [
+   "at",
+   1.943,
+   2.034
+  ],
+  [
+   "me",
+   2.045,
+   2.205
+  ]
+ ]
+}

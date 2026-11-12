@@ -1,0 +1,927 @@
+{
+  "episode": "wi_zlatan_bff",
+  "format": "what_if",
+  "title": "Zlatan Ibrahimović Became My Brother's BFF 😳",
+  "logline": "My brother claimed Zlatan was his best friend—until Saturday morning when Zlatan kicked open our front door.",
+  "hook_title": "ZLATAN BECAME MY BROTHER'S BFF",
+  "fps": 30,
+  "resolution": [1080, 1920],
+  "narrator": "Theo",
+  "music": "quirky",
+  "voices": {
+    "narrator": ["en-US-AndrewNeural", "+10%", "+2Hz"],
+    "Theo": ["en-US-AndrewNeural", "+10%", "+4Hz"],
+    "Brother": ["en-US-GuyNeural", "+8%", "+2Hz"],
+    "Dad": ["en-US-ChristopherNeural", "+4%", "-4Hz"],
+    "Zlatan": ["en-US-BrianMultilingualNeural", "+2%", "-4Hz"]
+  },
+  "characters": {
+    "Brother": {
+      "base": "Max",
+      "extras": [],
+      "skin": [0.92, 0.74, 0.62],
+      "hair": [0.22, 0.14, 0.08],
+      "hair_style": "short",
+      "top": [0.28, 0.26, 0.25],
+      "pants": [0.18, 0.22, 0.32],
+      "details": ["hood", "kangaroo"],
+      "accent": [0.35, 0.32, 0.30],
+      "shoes": [0.12, 0.12, 0.14]
+    }
+  },
+  "edit": {
+    "music_volume": 0.12,
+    "captions": {
+      "style": "chunk",
+      "case": "upper",
+      "max_words": 3,
+      "size": 104,
+      "y": 0.38,
+      "color": [1, 1, 1, 1],
+      "highlight": [1.0, 0.95, 0.15, 1],
+      "outline": 0.12,
+      "pop": true
+    },
+    "title_card": {
+      "show": false
+    }
+  },
+  "shots": [
+    {
+      "id": "s01",
+      "set": "bedroom",
+      "speaker": "narrator",
+      "text": "My brother claimed Zlatan Ibrahimović was his best friend.",
+      "camera": {
+        "shot": "medium",
+        "angle": "eye",
+        "move": "push_in",
+        "target": "Brother"
+      },
+      "cast": [
+        {
+          "name": "Brother",
+          "mark": "center",
+          "dx": 2.0,
+          "dy": 0.0,
+          "facing": "camera",
+          "pose": "hands_hips",
+          "face": "grin",
+          "action": "idle"
+        },
+        {
+          "name": "Theo",
+          "mark": "center",
+          "dx": -2.0,
+          "dy": -1.0,
+          "facing": "Brother",
+          "pose": "explain",
+          "face": "worried",
+          "action": "talk_still"
+        }
+      ],
+      "place": [
+        {
+          "prop": "poster",
+          "mark": "center",
+          "dx": 2.0,
+          "dy": 6.5,
+          "z": 4.5,
+          "scale": 1.2,
+          "rot": 0
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "pop"
+        }
+      ],
+      "emphasis": [
+        "zlatan",
+        "friend"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s02",
+      "set": "bedroom",
+      "speaker": "narrator",
+      "text": "He talked about Zlatan every single day.",
+      "camera": {
+        "shot": "medium",
+        "angle": "low",
+        "move": "static",
+        "target": "Brother"
+      },
+      "cast": [
+        {
+          "name": "Brother",
+          "mark": "center",
+          "dx": 0.0,
+          "dy": 0.0,
+          "facing": "camera",
+          "pose": "hold",
+          "face": "grin",
+          "action": "talk_still",
+          "props": [
+            "trophy"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.4,
+          "name": "sparkle"
+        }
+      ],
+      "emphasis": [
+        "zlatan",
+        "day"
+      ],
+      "transition": "whip"
+    },
+    {
+      "id": "s03",
+      "set": "kitchen",
+      "speaker": "Dad",
+      "text": "Son, Zlatan doesn't even know Sweden exists on a map.",
+      "camera": {
+        "shot": "medium_close",
+        "angle": "eye",
+        "move": "push_in",
+        "target": "Dad"
+      },
+      "cast": [
+        {
+          "name": "Dad",
+          "mark": "couch",
+          "facing": "camera",
+          "pose": "explain",
+          "face": "smirk",
+          "action": "talk"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "drum_hit"
+        }
+      ],
+      "emphasis": [
+        "sweden",
+        "map"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s04",
+      "set": "kitchen",
+      "speaker": "Dad",
+      "text": "You have four friends, and two of them are noobs.",
+      "camera": {
+        "shot": "close_up",
+        "angle": "eye",
+        "move": "static",
+        "target": "Dad"
+      },
+      "cast": [
+        {
+          "name": "Dad",
+          "mark": "couch",
+          "facing": "camera",
+          "pose": "hands_hips",
+          "face": "laugh",
+          "action": "talk"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.3,
+          "name": "boing"
+        }
+      ],
+      "emphasis": [
+        "four",
+        "noobs"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s05",
+      "set": "kitchen",
+      "speaker": "narrator",
+      "text": "I laughed: lions don't hang out with humans! My brother just smiled: you'll see.",
+      "camera": {
+        "shot": "two_shot",
+        "angle": "eye",
+        "move": "static",
+        "target": "Theo"
+      },
+      "cast": [
+        {
+          "name": "Theo",
+          "mark": "table_a",
+          "facing": "Brother",
+          "pose": "explain",
+          "face": "laugh",
+          "action": "talk_still"
+        },
+        {
+          "name": "Brother",
+          "mark": "table_b",
+          "facing": "Theo",
+          "pose": "arms_crossed",
+          "face": "smirk",
+          "action": "idle"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "record_scratch"
+        }
+      ],
+      "emphasis": [
+        "lions",
+        "see"
+      ],
+      "transition": "whip"
+    },
+    {
+      "id": "s06",
+      "set": "street",
+      "speaker": "narrator",
+      "text": "Then Saturday morning, the doorbell rang.",
+      "camera": {
+        "shot": "medium",
+        "angle": "eye",
+        "move": "push_in",
+        "target": "house_door"
+      },
+      "cast": [
+        {
+          "name": "Cameraman",
+          "mark": "house_door",
+          "dx": 2.5,
+          "dy": -2.0,
+          "facing": "house_door",
+          "pose": "hold",
+          "face": "smile",
+          "action": "idle",
+          "props": [
+            "camera"
+          ]
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.8,
+          "name": "ding"
+        }
+      ],
+      "emphasis": [
+        "doorbell",
+        "morning"
+      ],
+      "transition": "whip"
+    },
+    {
+      "id": "s07",
+      "set": "street",
+      "speaker": "narrator",
+      "text": "A cameraman stood outside, and behind him was Zlatan Ibrahimović shouting:",
+      "camera": {
+        "shot": "two_shot",
+        "angle": "low",
+        "move": "push_in",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Cameraman",
+          "mark": "sidewalk_b",
+          "dx": -1.5,
+          "dy": -1.0,
+          "facing": "camera",
+          "pose": "hold",
+          "face": "smile",
+          "action": "idle",
+          "props": [
+            "camera"
+          ]
+        },
+        {
+          "name": "Zlatan",
+          "mark": "sidewalk_b",
+          "dx": 1.2,
+          "dy": 0.8,
+          "facing": "camera",
+          "pose": "celebrate",
+          "face": "confident",
+          "action": "idle"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "riser"
+        }
+      ],
+      "emphasis": [
+        "cameraman",
+        "zlatan"
+      ],
+      "transition": "flash"
+    },
+    {
+      "id": "s08",
+      "set": "street",
+      "speaker": "Zlatan",
+      "text": "Where is my guy?! Zlatan has arrived!",
+      "camera": {
+        "shot": "close_up",
+        "angle": "low",
+        "move": "crash_zoom",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Zlatan",
+          "mark": "sidewalk_b",
+          "dx": 0.0,
+          "dy": 0.0,
+          "facing": "camera",
+          "pose": "arms_up",
+          "face": "confident",
+          "action": "talk"
+        }
+      ],
+      "fx": [
+        {
+          "type": "punch",
+          "at": 0.2
+        },
+        {
+          "type": "shake",
+          "at": 0.2,
+          "dur": 0.4,
+          "strength": 0.8
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "boom"
+        }
+      ],
+      "emphasis": [
+        "where",
+        "zlatan"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s09",
+      "set": "kitchen",
+      "speaker": "narrator",
+      "text": "My dad nearly swallowed his coffee.",
+      "camera": {
+        "shot": "close_up",
+        "angle": "eye",
+        "move": "static",
+        "target": "Dad"
+      },
+      "cast": [
+        {
+          "name": "Dad",
+          "mark": "couch",
+          "facing": "camera",
+          "pose": "shocked",
+          "face": "shocked",
+          "action": "surprise_hop"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "bonk"
+        }
+      ],
+      "emphasis": [
+        "swallowed",
+        "coffee"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s10",
+      "set": "kitchen",
+      "speaker": "Theo",
+      "text": "Is that... THE REAL ZLATAN?!",
+      "camera": {
+        "shot": "close_up",
+        "angle": "eye",
+        "move": "push_in",
+        "target": "Theo"
+      },
+      "cast": [
+        {
+          "name": "Theo",
+          "mark": "table_front",
+          "facing": "camera",
+          "pose": "hands_face",
+          "face": "shocked",
+          "action": "talk"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "buzzer"
+        }
+      ],
+      "emphasis": [
+        "real",
+        "zlatan"
+      ],
+      "transition": "whip"
+    },
+    {
+      "id": "s11",
+      "set": "kitchen",
+      "speaker": "Brother",
+      "text": "Back off! Zlatan is my best friend!",
+      "camera": {
+        "shot": "medium",
+        "angle": "eye",
+        "move": "pan_left",
+        "target": "Brother"
+      },
+      "cast": [
+        {
+          "name": "Brother",
+          "mark": "center",
+          "facing": "Theo",
+          "pose": "stop",
+          "face": "angry",
+          "action": "talk"
+        },
+        {
+          "name": "Theo",
+          "mark": "center",
+          "dx": -2.5,
+          "dy": -0.5,
+          "facing": "Brother",
+          "pose": "shocked",
+          "face": "worried",
+          "action": "idle"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.3,
+          "name": "whoosh"
+        }
+      ],
+      "emphasis": [
+        "back",
+        "friend"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s12",
+      "set": "street",
+      "speaker": "narrator",
+      "text": "Then they did a secret handshake longer than our school syllabus.",
+      "camera": {
+        "shot": "two_shot",
+        "angle": "eye",
+        "move": "orbit_left",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Zlatan",
+          "mark": "sidewalk_b",
+          "dx": -1.2,
+          "dy": 0.0,
+          "facing": "Brother",
+          "pose": "celebrate",
+          "face": "confident",
+          "action": "dance"
+        },
+        {
+          "name": "Brother",
+          "mark": "sidewalk_b",
+          "dx": 1.2,
+          "dy": 0.0,
+          "facing": "Zlatan",
+          "pose": "celebrate",
+          "face": "grin",
+          "action": "dance"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.5,
+          "name": "sparkle"
+        }
+      ],
+      "emphasis": [
+        "handshake",
+        "syllabus"
+      ],
+      "transition": "flash"
+    },
+    {
+      "id": "s13",
+      "set": "kitchen",
+      "speaker": "Zlatan",
+      "text": "Who called Zlatan's best friend a liar?!",
+      "camera": {
+        "shot": "medium_close",
+        "angle": "low",
+        "move": "push_in",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Zlatan",
+          "mark": "center",
+          "facing": "camera",
+          "pose": "arms_crossed",
+          "face": "angry",
+          "action": "talk"
+        }
+      ],
+      "fx": [
+        {
+          "type": "punch",
+          "at": 0.1
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "drum_hit"
+        }
+      ],
+      "emphasis": [
+        "called",
+        "liar"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s14",
+      "set": "kitchen",
+      "speaker": "narrator",
+      "text": "Everyone pointed at Dad. Dad pointed at me.",
+      "camera": {
+        "shot": "group",
+        "angle": "eye",
+        "move": "static",
+        "target": "Dad"
+      },
+      "cast": [
+        {
+          "name": "Dad",
+          "mark": "couch",
+          "facing": "Theo",
+          "pose": "point",
+          "face": "nervous",
+          "action": "idle"
+        },
+        {
+          "name": "Brother",
+          "mark": "center",
+          "dx": -2.0,
+          "dy": 0.0,
+          "facing": "Dad",
+          "pose": "point",
+          "face": "confident",
+          "action": "idle"
+        },
+        {
+          "name": "Theo",
+          "mark": "table_front",
+          "facing": "Dad",
+          "pose": "shocked",
+          "face": "worried",
+          "action": "idle"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "record_scratch"
+        }
+      ],
+      "emphasis": [
+        "dad",
+        "pointed"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s15",
+      "set": "kitchen",
+      "speaker": "Zlatan",
+      "text": "This kid defended my bicycle kicks on Twitter for two years! He is my day-one brother.",
+      "camera": {
+        "shot": "medium",
+        "angle": "low",
+        "move": "push_in",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Zlatan",
+          "mark": "center",
+          "facing": "camera",
+          "pose": "hold",
+          "face": "confident",
+          "action": "talk",
+          "props": [
+            "trophy"
+          ]
+        },
+        {
+          "name": "Brother",
+          "mark": "center",
+          "dx": 2.2,
+          "dy": 0.2,
+          "facing": "camera",
+          "pose": "celebrate",
+          "face": "grin",
+          "action": "idle"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.5,
+          "name": "sparkle"
+        }
+      ],
+      "emphasis": [
+        "twitter",
+        "brother"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s15b",
+      "set": "kitchen",
+      "speaker": "Zlatan",
+      "text": "And today, he trains with Zlatan!",
+      "camera": {
+        "shot": "close_up",
+        "angle": "eye",
+        "move": "static",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Zlatan",
+          "mark": "center",
+          "facing": "camera",
+          "pose": "celebrate",
+          "face": "confident",
+          "action": "talk"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "ding"
+        }
+      ],
+      "emphasis": [
+        "trains",
+        "zlatan"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s16",
+      "set": "kitchen",
+      "speaker": "Zlatan",
+      "text": "LET'S GO!",
+      "camera": {
+        "shot": "close_up",
+        "angle": "low",
+        "move": "crash_zoom",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Zlatan",
+          "mark": "center",
+          "facing": "camera",
+          "pose": "arms_up",
+          "face": "confident",
+          "action": "talk"
+        }
+      ],
+      "fx": [
+        {
+          "type": "shake",
+          "at": 0.1,
+          "dur": 0.5,
+          "strength": 0.9
+        },
+        {
+          "type": "punch",
+          "at": 0.1
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.1,
+          "name": "boom"
+        }
+      ],
+      "emphasis": [
+        "go"
+      ],
+      "transition": "flash"
+    },
+    {
+      "id": "s17",
+      "set": "kitchen",
+      "speaker": "narrator",
+      "text": "Within five minutes, my house became a stadium.",
+      "camera": {
+        "shot": "medium",
+        "angle": "low",
+        "move": "push_in",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Zlatan",
+          "mark": "center",
+          "dx": 0.0,
+          "dy": 0.0,
+          "facing": "couch",
+          "pose": "celebrate",
+          "face": "confident",
+          "action": "celebrate"
+        },
+        {
+          "name": "Dad",
+          "mark": "couch",
+          "facing": "Zlatan",
+          "pose": "scared",
+          "face": "worried",
+          "action": "idle"
+        }
+      ],
+      "place": [
+        {
+          "prop": "soccer_ball",
+          "mark": "center",
+          "dx": 1.0,
+          "dy": 1.5,
+          "z": 2.0,
+          "scale": 1.0,
+          "rot": 0
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.3,
+          "name": "whoosh"
+        }
+      ],
+      "emphasis": [
+        "stadium"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s17b",
+      "set": "kitchen",
+      "speaker": "narrator",
+      "text": "Zlatan was bicycle kicking soccer balls across the couch...",
+      "camera": {
+        "shot": "medium",
+        "angle": "low",
+        "move": "push_in",
+        "target": "Zlatan"
+      },
+      "cast": [
+        {
+          "name": "Zlatan",
+          "mark": "center",
+          "facing": "couch",
+          "pose": "celebrate",
+          "face": "confident",
+          "action": "celebrate"
+        },
+        {
+          "name": "Dad",
+          "mark": "couch",
+          "facing": "Zlatan",
+          "pose": "scared",
+          "face": "shocked",
+          "action": "idle"
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.2,
+          "name": "boing"
+        }
+      ],
+      "emphasis": [
+        "kicking",
+        "couch"
+      ],
+      "transition": "cut"
+    },
+    {
+      "id": "s18",
+      "set": "kitchen",
+      "speaker": "narrator",
+      "text": "My brother was screaming, and our cat was already planning its escape.",
+      "camera": {
+        "shot": "medium",
+        "angle": "eye",
+        "move": "push_in",
+        "target": "Brother"
+      },
+      "cast": [
+        {
+          "name": "Brother",
+          "mark": "center",
+          "dx": -0.6,
+          "dy": 0.0,
+          "facing": "camera",
+          "pose": "arms_up",
+          "face": "shocked",
+          "action": "surprise_hop"
+        },
+        {
+          "name": "Dad",
+          "mark": "couch",
+          "facing": "Brother",
+          "pose": "scared",
+          "face": "shocked",
+          "action": "idle"
+        }
+      ],
+      "place": [
+        {
+          "prop": "cat",
+          "mark": "center",
+          "id": "cat_pet",
+          "dx": 0.7,
+          "dy": -0.5,
+          "z": 0.0,
+          "scale": 1.6,
+          "rot": 160
+        }
+      ],
+      "sfx": [
+        {
+          "at": 0.4,
+          "name": "slide_down"
+        }
+      ],
+      "emphasis": [
+        "screaming",
+        "escape"
+      ],
+      "transition": "fade_black"
+    }
+  ],
+  "thumbnail": {
+    "shot": "s08",
+    "at": 0.5
+  },
+  "publish": {
+    "tiktok_caption": "My brother claimed Zlatan was his best friend... then this happened 😳⚽ #zlatan #roblox #robloxstory #funny #shorts",
+    "youtube_title": "Zlatan Ibrahimović Became My Brother's BFF 😳 #shorts #roblox",
+    "youtube_description": "My brother said Zlatan was his best friend. We laughed at him until Saturday morning...",
+    "hashtags": [
+      "#zlatan",
+      "#roblox",
+      "#football",
+      "#soccer",
+      "#shorts",
+      "#viral"
+    ],
+    "tags": [
+      "zlatan",
+      "zlatan ibrahimovic",
+      "roblox",
+      "roblox animation",
+      "ishowspeed",
+      "comedy",
+      "shorts"
+    ]
+  }
+}

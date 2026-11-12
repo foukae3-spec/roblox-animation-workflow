@@ -1,0 +1,53 @@
+{
+ "key": "en-US-AndrewNeural|+10%|+2Hz|My brother claimed Zlatan Ibrahimovi\u0107 was his best friend.",
+ "engine": "edge",
+ "speaker": "narrator",
+ "audio_len": 3.216,
+ "words": [
+  [
+   "My",
+   0.091,
+   0.182
+  ],
+  [
+   "brother",
+   0.193,
+   0.5
+  ],
+  [
+   "claimed",
+   0.511,
+   0.795
+  ],
+  [
+   "Zlatan",
+   0.807,
+   1.261
+  ],
+  [
+   "Ibrahimovi\u0107",
+   1.273,
+   1.943
+  ],
+  [
+   "was",
+   1.955,
+   2.08
+  ],
+  [
+   "his",
+   2.091,
+   2.205
+  ],
+  [
+   "best",
+   2.216,
+   2.466
+  ],
+  [
+   "friend",
+   2.477,
+   2.864
+  ]
+ ]
+}

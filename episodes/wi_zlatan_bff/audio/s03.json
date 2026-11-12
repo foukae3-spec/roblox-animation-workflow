@@ -1,0 +1,58 @@
+{
+ "key": "en-US-ChristopherNeural|+4%|-4Hz|Son, Zlatan doesn't even know Sweden exists on a map.",
+ "engine": "edge",
+ "speaker": "Dad",
+ "audio_len": 4.416,
+ "words": [
+  [
+   "Son",
+   0.098,
+   0.579
+  ],
+  [
+   "Zlatan",
+   0.795,
+   1.336
+  ],
+  [
+   "doesn't",
+   1.348,
+   1.612
+  ],
+  [
+   "even",
+   1.625,
+   1.853
+  ],
+  [
+   "know",
+   1.865,
+   2.021
+  ],
+  [
+   "Sweden",
+   2.033,
+   2.466
+  ],
+  [
+   "exists",
+   2.478,
+   2.971
+  ],
+  [
+   "on",
+   2.983,
+   3.127
+  ],
+  [
+   "a",
+   3.139,
+   3.163
+  ],
+  [
+   "map",
+   3.175,
+   3.584
+  ]
+ ]
+}

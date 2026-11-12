@@ -1,0 +1,58 @@
+{
+ "key": "en-US-ChristopherNeural|+4%|-4Hz|You have four friends, and two of them are noobs.",
+ "engine": "edge",
+ "speaker": "Dad",
+ "audio_len": 3.672,
+ "words": [
+  [
+   "You",
+   0.098,
+   0.266
+  ],
+  [
+   "have",
+   0.278,
+   0.495
+  ],
+  [
+   "four",
+   0.507,
+   0.759
+  ],
+  [
+   "friends",
+   0.771,
+   1.3
+  ],
+  [
+   "and",
+   1.456,
+   1.649
+  ],
+  [
+   "two",
+   1.661,
+   1.889
+  ],
+  [
+   "of",
+   1.901,
+   1.997
+  ],
+  [
+   "them",
+   2.009,
+   2.177
+  ],
+  [
+   "are",
+   2.189,
+   2.274
+  ],
+  [
+   "noobs",
+   2.286,
+   2.826
+  ]
+ ]
+}
